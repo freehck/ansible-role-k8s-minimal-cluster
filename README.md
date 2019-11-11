@@ -1,7 +1,7 @@
-freehck.k8s
+freehck.k8s_minimal_cluster
 =========
 
-Install kubernetes cluster
+Install kubernetes cluster (minimal working)
 
 Description
 -----------
@@ -10,65 +10,9 @@ This role installs kubernetes cluster. Full automation: installs all the binarie
 
 This role is a dummy one, and it uses other simple roles from Galaxy.
 
-Role Variables
---------------
+This purpose of this role is to be a minimal testing variant of `freehck.k8s`, that I use for testing application roles, so it uses the same variable prefix `k8s_`, not `k8s_minimal_cluster_`. Consider this role as a tasting approach, not something more. If you need to deploy kubernetes, please use `freehck.k8s` instead of this one.
 
-#### Common cluster configuration
-
-##### Global
-
-`k8s_ver`: Kubernetes version to install (default is `1.16.2-00`)
-
-`k8s_cidr`: CIDR your pod network will use (default is `192.168.0.0/16`)
-
-##### Unique per host
-
-`k8s_node_ip`: ip address of the node (no default value, must be set explicitly)
-
-`k8s_node_name`: node name (default is `{{ inventory_hostname }}`
-
-##### Special
-
-`k8s_is_master`: this flag must be set to `true` only for kubernetes master node, so do it in `host_vars` or in your `inventory` (default is `false`)
-
-
-
-#### Calico CNI
-
-`k8s_enable_calico`: flag enabling Calico CNI (default is `true`)
-
-`k8s_calico_ver`: Calico CNI's version to install (default is `v3.10`)
-
-
-Example
--------
-
-###### inventory
-
-    k8s-node-0 ansible_host=10.118.19.10 k8s_is_master=true
-    k8s-node-1 ansible_host=10.118.19.11
-    k8s-node-2 ansible_host=10.118.19.12
-    
-    [k8s_cluster]
-    k8s-node-0
-    k8s-node-1
-    k8s-node-2
-
-###### group_vars/k8s_cluster.yml
-
-    ---
-    k8s_ver: "1.16.2-00"
-    k8s_node_ip: "{{ ansible_host }}"
-    k8s_cidr: "192.168.0.0/16"
-    k8s_enable_calico: true
-    k8s_calico_ver: "v3.10"
-
-###### playbook.yml
-
-    - hosts: k8s_cluster
-      become: true
-      roles:
-        - role: freehck.k8s
+Due to reasons above I don't provide any variables and playbook examples in this readme.
 
 Tests
 -----
@@ -84,7 +28,7 @@ Install
 
 This role can be installed from [Ansible Galaxy](https://galaxy.ansible.com/):
 
-`ansible-galaxy install freehck.k8s`
+`ansible-galaxy install freehck.k8s_minimal_cluster`
 
 License
 -------
