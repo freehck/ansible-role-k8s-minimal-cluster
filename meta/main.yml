@@ -1,8 +1,8 @@
 ---
 galaxy_info:
   author: Dmitrii Kashin
-  description: install kubernetes cluster
-  role_name: k8s
+  description: install kubernetes cluster (minimal)
+  role_name: k8s_minimal
   license: MIT
 
   min_ansible_version: 2.7
@@ -48,8 +48,8 @@ dependencies:
     when:
       - k8s_is_master
 
-  # apps
-  - role: freehck.k8s_app_dashboard
-    when:
-      - k8s_is_master
-      - k8s_app_install_dashboard
+#  # apps
+#  - role: freehck.k8s_app_dashboard
+#    when:
+#      - k8s_is_master
+#      - k8s_app_install_dashboard
